@@ -118,7 +118,8 @@ function creerMatriceTelephonesCriteres(phones, criteres,criteres_ponderes) {
     let validateButton = document.createElement('button');
     validateButton.textContent = 'Valider';
     validateButton.addEventListener('click', function () {
-        document.querySelector("#result").textContent = "Le meilleur choix est ",calculatePoid(matrice,criteres_ponderes)
+        let meilleurChoix = calculatePoid(matrice, criteres_ponderes);
+        document.querySelector("#result").textContent = `Le meilleur choix est ${meilleurChoix}`;
     });
     tableDiv.appendChild(validateButton);
 
@@ -150,6 +151,36 @@ function calculatePoid(matrice_f,criteres_ponderes){
                 maxIndex = i;
             }
         }
+        // Retrieve a div from the HTML to display the title and table
+        let resultDiv = document.querySelector('#details');
+        resultDiv.innerHTML = '<h2>Détails</h2>'; // Add a title
+
+        // Create a table to display the matrix with the last column as "Total"
+        let table = document.createElement('table');
+        table.border = 1;
+
+        // Add headers to the table
+        let headerRow = document.createElement('tr');
+        for (let j = 0; j < matrice_f[0].length; j++) {
+            let th = document.createElement('th');
+            th.textContent = j === matrice_f[0].length - 1 ? 'Total du poids' : matrice_f[0][j];
+            headerRow.appendChild(th);
+        }
+        table.appendChild(headerRow);
+
+        // Add rows to the table
+        for (let i = 1; i < matrice_f.length; i++) {
+            let tr = document.createElement('tr');
+            for (let j = 0; j < matrice_f[i].length; j++) {
+                let td = document.createElement('td');
+                td.textContent = j === matrice_f[i].length - 1 ? total[i] : matrice_f[i][j];
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+
+        // Append the table to the result div
+        resultDiv.appendChild(table);
 
         return matrix_copy[maxIndex][0]; // Retourne le nom du téléphone avec le score le plus élevé
     
