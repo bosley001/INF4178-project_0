@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>INF4178-Project_0</title>
+    <link rel="stylesheet" href="index.css">
+
 </head>
 <body>
     <h1>Methodes de prise de decision AHP</h1>
-    <h2>Quels telphone vais-je acheter</h2>
+    <h2>Quels telephone vais-je acheter</h2>
     <h3>Alternatives</h3>
     <form id="phone-selection-form">
         <fieldset>
@@ -25,7 +27,7 @@
             <label><input type="checkbox" name="phones" value="Samsung Galaxy Note 10"> Samsung Galaxy Note 10</label><br>
         </fieldset>
     </form>
-    <button id="phones-confirm">ok</button>
+    <button id="phones-confirm">Confirmer</button>
     <h3>Critères</h3>
     <form id="criteria-selection-form">
         <fieldset>
@@ -45,15 +47,18 @@
             <label><input type="checkbox" name="criteria" value="Disponibilité"> Disponibilité</label><br>
         </fieldset>
     </form>
-    <button id="criteres-confirm">ok</button>
+    <button id="criteres-confirm">Selectionner</button>
 
+    <div id="cache" >
     <h3>Donner l'importance relative de chaque Critères par rapport a l'objectif</h3>
     <h4>repondre au question suivante</h4>
     <div id="echelle-preferences"></div>
     <button id="valider">valider</button>
-
+    </div>
     <div id="table-container"></div>
-<button id="generate-matrix">Générer la matrice</button>
+    <h3 id="result" style="color: rgb(17, 226, 122);"></h3>
+
+    <div id="details"></div>
 </body>
-<script src="1.js"></script>
+<script src="index.js"></script>
 </html>

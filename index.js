@@ -1,13 +1,3 @@
-// choix d'alternatives
-// criters
-// echelle de preference relatives au criteres
-// 1 Importance egale , 3 Importance modérée , 5 Importance forte, 7 Importance tres forte , 9 Importance extreme
-// 2, 4, 6, 8 Importance intermédiaire entre les valeurs ci-dessus
-// valeur inverse 1/3 , 1/5 , 1/7 , 1/9
-
-
-
-
 function matrix_norm (matrix) {
     let n = matrix.length;
     let matrix_copy = matrix.map(row => row.slice()); // Create a copy of the matrix
@@ -43,7 +33,6 @@ function somme_criteres_ponderes(matrix,criteres) {
             matrix_copy[i][j]=p* criteres[j-1]; // Multiply the matrix by the normalized matrix
         }
     }
-    console.log('matrice copie ',matrix_copy);
     for (let i = 1; i < n-1; i++) {
         let sum = 0;
         for (let j = 1; j < n-1; j++) {
@@ -51,7 +40,6 @@ function somme_criteres_ponderes(matrix,criteres) {
         }
         somme_criteres_ponderes.push(sum); // Average of the row
     }
-    // somme_criteres_ponderes = criteres_ponderes(matrix_copy);
     return somme_criteres_ponderes;
 }
 
@@ -82,7 +70,7 @@ function taux_coherence(indice_c,n){
 
 }
 
-function creerMatriceTelephonesCriteres(phones, criteres) {
+function creerMatriceTelephonesCriteres(phones, criteres,criteres_ponderes) {
     // Créer une matrice vide
     let n = phones.length + 1; // +1 pour inclure les en-têtes
     let m = criteres.length + 1; // +1 pour inclure les en-têtes
@@ -130,20 +118,45 @@ function creerMatriceTelephonesCriteres(phones, criteres) {
     let validateButton = document.createElement('button');
     validateButton.textContent = 'Valider';
     validateButton.addEventListener('click', function () {
-        console.log('Matrice remplie :', matrice);
+        document.querySelector("#result").textContent = "Le meilleur choix est ",calculatePoid(matrice,criteres_ponderes)
     });
     tableDiv.appendChild(validateButton);
+
 }
 
-// Exemple d'utilisation
-// document.querySelector('#generate-matrix').addEventListener('click', function () {
-//     creerMatriceTelephonesCriteres(selectedPhones, selectedCriteria);
-// });
+function calculatePoid(matrice_f,criteres_ponderes){
 
+    n=matrice_f.length
+    let total = []
+    // let indice = 0
+    
+    let matrix_copy = matrice_f.map(row => row.slice()); // Crée une copie du tableau
+    for (let i = 1; i < n; i++) {
+        let sum_l=0
+        for (let j = 1; j < n; j++) {
+        matrix_copy[i][j] = matrix_copy[i][j]*criteres_ponderes[j-1] 
+        sum_l = sum_l + matrix_copy[i][j]
+        
+        
+        }
+        total[i] = sum_l
+    }
+        let maxIndex = 1;
+        let tot = total
+        let maxValue = tot[1];
+        for (let i = 2; i < tot.length; i++) {
+            if (tot[i] > maxValue) {
+                maxValue = tot[i];
+                maxIndex = i;
+            }
+        }
 
+        return matrix_copy[maxIndex][0]; // Retourne le nom du téléphone avec le score le plus élevé
+    
 
-let echellePreferences = [[1,'Importance egale'],[2,'moyen'], [3,'Importance modérée'],[4,'moyen'], [5,'Importance forte'], [7,'Importance tres forte'], [9,'Importance extreme']];
+}
 
+let echellePreferences = [[2,'moyen'], [3,'Importance modérée'],[4,'moyen'], [5,'Importance forte'], [7,'Importance tres forte'], [9,'Importance extreme']];
 
 let selectedPhones = [];
 let selectedCriteria = [];
@@ -151,15 +164,15 @@ let selectedCriteria = [];
 document.querySelector('#phones-confirm').addEventListener('click', function() {
     selectedPhones = Array.from(document.querySelectorAll('input[name="phones"]:checked'))
         .map(input => input.value);
-    console.log(selectedPhones); 
 });
 let innerJoinDiv = document.querySelector('#echelle-preferences');
 
 
 document.querySelector('#criteres-confirm').addEventListener('click', function() {
+
+    document.getElementById('cache').style.display = 'block';
     selectedCriteria = Array.from(document.querySelectorAll('input[name="criteria"]:checked'))
         .map(input => input.value);
-    console.log(selectedCriteria); // Send this data to your JS logic
 
     // Create a matrix of size (n+1) x n
     let n = selectedCriteria.length + 1;
@@ -170,6 +183,7 @@ document.querySelector('#criteres-confirm').addEventListener('click', function()
         matrix[i][0] = selectedCriteria[i - 1];
         matrix[0][i] = selectedCriteria[i - 1];
     }
+    
 
     // Generate the preference selection UI
     selectedCriteria.forEach((elt, index) => {
@@ -186,11 +200,11 @@ document.querySelector('#criteres-confirm').addEventListener('click', function()
                     let preferenceValue = parseInt(event.target.value);
                     matrix[index + 1][indexs + 1] = preferenceValue;
                     matrix[indexs + 1][index + 1] = 1 / preferenceValue; // Set the inverse value in the lower diagonal
-                    // console.log(matrix); // Log the updated matrix
                 });
             }
         });
     });
+
     document.querySelector('#valider').addEventListener('click', function() {
         for (let i = 1; i < n; i++) {
             matrix[i][i] = 1; // Set diagonal to 1
@@ -208,30 +222,18 @@ document.querySelector('#criteres-confirm').addEventListener('click', function()
         }
    
         matrix.push(lastRow); // Append the last row to the matrix
-        console.log('matrice ',matrix);
-        // console.log('valeur de lindice finale');
         let matrice_norm = matrix_norm(matrix);
-        console.log('matrice normalisée ',matrice_norm);
         let criteresPonderes = criteres_ponderes(matrice_norm);
-        console.log('criteres ponderes ',criteresPonderes);
         let sommeCriteresPonderes = somme_criteres_ponderes(matrix, criteresPonderes);
-        console.log('somme criteres ponderes ',sommeCriteresPonderes);
         let coherenceI = coherence_i(criteresPonderes,sommeCriteresPonderes);
-        console.log('coherence i ',coherenceI);
         let coherenceMax = coherence_max(coherenceI);
-        console.log('coherence max ',coherenceMax);
         let indiceCoherence = indice_coherence(coherenceMax,selectedCriteria.length);
         let tauxCoherence = taux_coherence(indiceCoherence,selectedCriteria.length);
-        console.log('taux coherence ',tauxCoherence);
-        // let k = taux_coherence(indice_coherence(coherence_max(coherence_i(criteres_ponderes(matrix_norm(matrix)),somme_criteres_ponderes(matrix,matrix_norm(matrix)))),selectedCriteria.length),selectedCriteria.length);
-        // console.log(k)
-        // if(tauxCoherence){}
-        creerMatriceTelephonesCriteres(selectedPhones, selectedCriteria);
+
+        creerMatriceTelephonesCriteres(selectedPhones, selectedCriteria,criteresPonderes);
+
     
     });
 
-     // Initial matrix
 });
 
-
-// #echelle-preferences
