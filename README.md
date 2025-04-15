@@ -3,7 +3,8 @@
 Ce projet permet d’utiliser la méthode AHP (Analytic Hierarchy Process) pour choisir le téléphone idéal selon des critères que vous définissez.
 
 ## 👨‍💻 Auteur
-**Patrick FOUOTSOP FOSSO**
+**FANDJA DE TCHOUA ANNAELLE ORLANE**
+**21T2311**
 
 ## 📆 Date
 Avril 2025
