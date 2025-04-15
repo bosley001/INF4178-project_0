@@ -33,3 +33,10 @@ cd INF4178-project_0
 2. Executer le fichier index
 
 Copier le chemin d'acces du fichier index.html et coller le sur un navigateur au choix
+
+## Test
+
+1. Choissisez un ou plusieurs telephone et cliquer sur le bouton confirmer
+2. Choisissez un ou plusieurs criteres et cliquez sur le bouton Selectionner
+3. Remplir toute les importances relatives de chaque criteres
+4. Remplissez le tableau des specifications puis valider

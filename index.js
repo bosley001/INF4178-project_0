@@ -163,19 +163,25 @@ function calculatePoid(matrice_f,criteres_ponderes){
         let headerRow = document.createElement('tr');
         for (let j = 0; j < matrice_f[0].length; j++) {
             let th = document.createElement('th');
-            th.textContent = j === matrice_f[0].length - 1 ? 'Total du poids' : matrice_f[0][j];
+            th.textContent = matrice_f[0][j];
             headerRow.appendChild(th);
         }
+        let totalHeader = document.createElement('th');
+        totalHeader.textContent = 'Total du poids';
+        headerRow.appendChild(totalHeader);
         table.appendChild(headerRow);
 
         // Add rows to the table
         for (let i = 1; i < matrice_f.length; i++) {
             let tr = document.createElement('tr');
             for (let j = 0; j < matrice_f[i].length; j++) {
-                let td = document.createElement('td');
-                td.textContent = j === matrice_f[i].length - 1 ? total[i] : matrice_f[i][j];
-                tr.appendChild(td);
+            let td = document.createElement('td');
+            td.textContent = matrice_f[i][j];
+            tr.appendChild(td);
             }
+            let totalCell = document.createElement('td');
+            totalCell.textContent = total[i];
+            tr.appendChild(totalCell);
             table.appendChild(tr);
         }
 
@@ -187,7 +193,7 @@ function calculatePoid(matrice_f,criteres_ponderes){
 
 }
 
-let echellePreferences = [[2,'moyen'], [3,'Importance modérée'],[4,'moyen'], [5,'Importance forte'], [7,'Importance tres forte'], [9,'Importance extreme']];
+let echellePreferences = [[2,'Importance un peu moderee'], [3,'Importance modérée'],[4,'Importance un peu forte'], [5,'Importance forte'], [7,'Importance tres forte'], [9,'Importance extreme']];
 
 let selectedPhones = [];
 let selectedCriteria = [];
