@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Methodes de prise de decision AHP</h1>
+    <h2>Quels telphone vais-je acheter</h2>
+    <h3>Alternatives</h3>
+    <form id="phone-selection-form">
+        <fieldset>
+            <legend>Choisissez vos téléphones préférés :</legend>
+            <label><input type="checkbox" name="phones" value="Samsung Galaxy S22"> Samsung Galaxy S22</label><br>
+            <label><input type="checkbox" name="phones" value="Google Pixel 7"> Google Pixel 7</label><br>
+            <label><input type="checkbox" name="phones" value="Xiaomi Redmi note 10"> Xiaomi Redmi note 10</label><br>
+            <label><input type="checkbox" name="phones" value="Iphone 12"> Iphone 12</label><br>
+            <label><input type="checkbox" name="phones" value="ItelA56"> ItelA56</label><br>
+            <label><input type="checkbox" name="phones" value="Tecno Camon 12"> Tecno Camon 12</label><br>
+            <label><input type="checkbox" name="phones" value="Infinix Hot 10"> Infinix Hot 10</label><br>
+            <label><input type="checkbox" name="phones" value="Huawei P30"> Huawei P30</label><br>
+            <label><input type="checkbox" name="phones" value="Motorola razr+"> Motorola razr+</label><br>
+            <label><input type="checkbox" name="phones" value="Iphone X R"> Iphone X R</label><br>
+            <label><input type="checkbox" name="phones" value="Samsung Galaxy Note 10"> Samsung Galaxy Note 10</label><br>
+        </fieldset>
+    </form>
+    <button id="phones-confirm">ok</button>
+    <h3>Critères</h3>
+    <form id="criteria-selection-form">
+        <fieldset>
+            <legend>Choisissez les critères importants :</legend>
+            <label><input type="checkbox" name="criteria" value="Prix"> Prix</label><br>
+            <label><input type="checkbox" name="criteria" value="Autonomie"> Autonomie</label><br>
+            <label><input type="checkbox" name="criteria" value="Qualité de l'appareil photo"> Qualité de l'appareil photo</label><br>
+            <label><input type="checkbox" name="criteria" value="Durabilité"> Durabilité</label><br>
+            <label><input type="checkbox" name="criteria" value="Design"> Design</label><br>
+            <label><input type="checkbox" name="criteria" value="Marque"> Marque</label><br>
+            <label><input type="checkbox" name="criteria" value="Stockage"> Stockage</label><br>
+            <label><input type="checkbox" name="criteria" value="Memoire"> Memoire</label><br>
+            <label><input type="checkbox" name="criteria" value="Frequence du processeur"> Frequence du processeur</label><br>
+            <label><input type="checkbox" name="criteria" value="Poids"> Poids</label><br>
+            <label><input type="checkbox" name="criteria" value="Connectivité"> Connectivité</label><br>
+            <label><input type="checkbox" name="criteria" value="Accessoires"> Accessoires</label><br>
+            <label><input type="checkbox" name="criteria" value="Disponibilité"> Disponibilité</label><br>
+        </fieldset>
+    </form>
+    <button id="criteres-confirm">ok</button>
+
+    <h3>Donner l'importance relative de chaque Critères par rapport a l'objectif</h3>
+    <h4>repondre au question suivante</h4>
+    <div id="echelle-preferences"></div>
+    <button id="valider">valider</button>
+
+    <div id="table-container"></div>
+<button id="generate-matrix">Générer la matrice</button>
+</body>
+<script src="1.js"></script>
+</html>
